@@ -2,6 +2,7 @@ package spaceshipgame;
 
 import java.util.ArrayList;
 
+import com.sun.istack.internal.Nullable;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PGraphics;
@@ -50,6 +51,7 @@ class Spaceship implements UID {
 	boolean laser = false;
 	boolean ghost = false;
 	boolean homing = false;
+	boolean shield = true;
 
 	// upgrade slots
 	Upgrade biggerUpgradeSlot;
@@ -63,6 +65,9 @@ class Spaceship implements UID {
 	int shootingTimer = 30000; // in FPS
 	float reloadTime = Constants.DEFAULT_RELOAD_TIME; // in seconds
 
+	// Visual
+	float shieldTurn = 0;
+
 	public Spaceship(long uid, Main ctx, int x, int y, ControllerConfig controls, int m, int c, String n) {
 		this.uid = uid;
 
@@ -75,15 +80,15 @@ class Spaceship implements UID {
 		name = n;
 	}
 
-	public Spaceship(long uid, Main g, int x, int y, boolean isPlayer, ControllerConfig keysForPlayer, int m, int c) {
+	public Spaceship(long uid, Main g, int x, int y, boolean isPlayer, @Nullable ControllerConfig keysForPlayer, int m, int c) {
 		this(uid, g, x, y, keysForPlayer, m, c, "bob");
 	}
 
-	public Spaceship(long uid, Main g, int x, int y, boolean isPlayer, ControllerConfig keysForPlayer, int m) {
+	public Spaceship(long uid, Main g, int x, int y, boolean isPlayer, @Nullable ControllerConfig keysForPlayer, int m) {
 		this(uid, g, x, y, keysForPlayer, m, -1, "bob");
 	}
 	
-	void drawSpaceship(PGraphics ctx, float x, float y, float angle, boolean thrusters) {		
+	void drawSpaceship(PGraphics ctx, float x, float y, float angle, boolean thrusters) {
 		// s = 2
 		ctx.pushMatrix();
 		ctx.translate(x, y);
@@ -155,16 +160,30 @@ class Spaceship implements UID {
 	}
 
 	void draw(PGraphics ctx) {
-		/*
-		 * if(shield) { noStroke(); fill(255); pushMatrix(); translate(pos.x, pos.y);
-		 * noFill(); rotate(radians((shieldTurn * 50) / g.FRAMERATE));
-		 * 
-		 * for(int i = 0; i < 360 / 10; i++) { rotate(radians(360 / 10)); fill(255);
-		 * triangle(-15, -50, 0, -80, 15, -50); }
-		 * 
-		 * noStroke(); fill(150, 0, 125); ellipse(0, 0, 100, 100); strokeWeight(10);
-		 * stroke(255); noFill(); ellipse(0, 0, 105, 105); popMatrix(); }
-		 */
+		if(shield) { 
+			ctx.noStroke();
+			ctx.fill(255);
+			ctx.pushMatrix();
+			ctx.translate(pos.x, pos.y);
+			ctx.noFill(); 
+			ctx.rotate(shieldTurn / Constants.FPS); 
+			
+			for(int i = 0; i < 360 / 10; i++) {
+				ctx.rotate((float) (Math.PI / 8));
+				ctx.fill(255);
+				ctx.triangle(-15, -Constants.SHIELD_DIAMETER / 2, 0, -Constants.SHIELD_DIAMETER / 2 - 30, 15, -Constants.SHIELD_DIAMETER / 2);
+			}
+			
+			ctx.noStroke();
+			ctx.fill(150, 0, 125);
+			ctx.ellipse(0, 0, Constants.SHIELD_DIAMETER, Constants.SHIELD_DIAMETER);
+			ctx.strokeWeight(10);
+			ctx.stroke(255);
+			ctx.noFill();
+			ctx.ellipse(0, 0, Constants.SHIELD_DIAMETER + 5, Constants.SHIELD_DIAMETER + 5);
+			ctx.popMatrix();
+			shieldTurn++;
+		}
 
 		ctx.fill(greyifyColor(ctx.red(color)), greyifyColor(ctx.green(color)), greyifyColor(ctx.blue(color)));
 		ctx.stroke(greyifyColor(ctx.red(color)), greyifyColor(ctx.green(color)), greyifyColor(ctx.blue(color)));

@@ -58,6 +58,7 @@ class Bullet implements UID {
 
 			if(nearest != null) {
 				float ang = PApplet.atan2(nearest.pos.y - this.pos.y, nearest.pos.x - this.pos.x);
+				
 				vel.x = (float) (Math.cos(ang) * Constants.HOMING_SPEED);
 				vel.y = (float) (Math.sin(ang) * Constants.HOMING_SPEED);
 				
@@ -97,6 +98,7 @@ class Bullet implements UID {
 			 * round(s.pos.x), round(s.pos.y), 110); }
 			 */
 		}
+		
 		return false;
 	}
 

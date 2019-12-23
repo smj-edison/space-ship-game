@@ -163,7 +163,6 @@ public class Game {
 		}
 		
 		Constants.PLAY_SIZE = Math.max(50, Constants.PLAY_SIZE);
-		
 		if(Math.random() * 50 <= 1) {
 			float[] upgradeLocation = MathHelpers.randomInCircle(0, 0, Constants.PLAY_SIZE);
 
