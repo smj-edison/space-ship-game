@@ -3,7 +3,6 @@ package spaceshipgame;
 import java.util.ArrayList;
 
 import com.sun.istack.internal.Nullable;
-
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PGraphics;
@@ -65,7 +64,7 @@ class Spaceship implements UID {
 
 	int shootingTimer = 30000; // in FPS
 	float reloadTime = Constants.DEFAULT_RELOAD_TIME; // in seconds
-	
+
 	// Visual
 	float shieldTurn = 0;
 

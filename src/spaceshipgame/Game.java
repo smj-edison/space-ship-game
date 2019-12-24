@@ -152,8 +152,17 @@ public class Game {
 
 		minimap.endDraw();
 	}
-
+	
+	int frameCount = 0;
+	
 	private void update(Game game) {
+		frameCount++;
+		
+		if(frameCount % 10 == 0) {
+			Constants.PLAY_SIZE -= 0.000001;
+		}
+		
+		Constants.PLAY_SIZE = Math.max(50, Constants.PLAY_SIZE);
 		if(Math.random() * 50 <= 1) {
 			float[] upgradeLocation = MathHelpers.randomInCircle(0, 0, Constants.PLAY_SIZE);
 

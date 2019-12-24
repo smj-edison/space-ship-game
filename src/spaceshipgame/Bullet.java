@@ -58,8 +58,9 @@ class Bullet implements UID {
 
 			if(nearest != null) {
 				float ang = PApplet.atan2(nearest.pos.y - this.pos.y, nearest.pos.x - this.pos.x);
-				vel.x += Math.cos(ang) * Constants.HOMING_SPEED;
-				vel.y += Math.sin(ang) * Constants.HOMING_SPEED;
+				
+				vel.x = (float) (Math.cos(ang) * Constants.HOMING_SPEED);
+				vel.y = (float) (Math.sin(ang) * Constants.HOMING_SPEED);
 				
 				if(maxSpeed != 0) {
 					vel.limit(maxSpeed);
@@ -85,7 +86,7 @@ class Bullet implements UID {
 	}
 
 	public boolean isColliding(Spaceship s) {
-		if(/*!s.ghost &&*/ s.uid != sourceId) {
+		if(!s.ghost && s.uid != sourceId) {
 
 			if(!s.shield) {
 				return TestOverlap.polygonCircleRotateCollide(Constants.getNewSpaceshipPoints(), s.pos.x, s.pos.y,
