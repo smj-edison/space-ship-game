@@ -2,12 +2,9 @@ package spaceshipgame;
 
 import java.util.ArrayList;
 
-import com.sun.istack.internal.Nullable;
-import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.core.PVector;
-import spaceshipgame.physics.TestOverlap;
 import spaceshipgame.util.MathHelpers;
 
 class Spaceship implements UID {
@@ -80,11 +77,11 @@ class Spaceship implements UID {
 		name = n;
 	}
 
-	public Spaceship(long uid, Main g, int x, int y, boolean isPlayer, @Nullable ControllerConfig keysForPlayer, int m, int c) {
+	public Spaceship(long uid, Main g, int x, int y, boolean isPlayer, ControllerConfig keysForPlayer, int m, int c) {
 		this(uid, g, x, y, keysForPlayer, m, c, "bob");
 	}
 
-	public Spaceship(long uid, Main g, int x, int y, boolean isPlayer, @Nullable ControllerConfig keysForPlayer, int m) {
+	public Spaceship(long uid, Main g, int x, int y, boolean isPlayer, ControllerConfig keysForPlayer, int m) {
 		this(uid, g, x, y, keysForPlayer, m, -1, "bob");
 	}
 	

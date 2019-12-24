@@ -3,7 +3,7 @@ package spaceshipgame;
 public class Constants {
 	public static final int FPS = 25;
 	
-	public static final int PLAY_SIZE = 1500;
+	public static int PLAY_SIZE = 1500;
 	
 	public static final float MAX_TURN_SPEED = 0.8f;
 	public static final int MAX_LIFE = 1000;
