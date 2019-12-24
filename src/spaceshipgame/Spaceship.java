@@ -64,6 +64,7 @@ class Spaceship implements UID {
 
 	int shootingTimer = 30000; // in FPS
 	float reloadTime = Constants.DEFAULT_RELOAD_TIME; // in seconds
+	float shieldTimeLeft = 5;
 
 	// Visual
 	float shieldTurn = 0;
@@ -258,7 +259,11 @@ class Spaceship implements UID {
 		aacc = 0;
 
 		shootingTimer++;
-		// shieldTurn++;
+		shieldTimeLeft -= 1 / (float) Constants.FPS;
+		
+		if(shieldTimeLeft < 0) {
+			shield = false;
+		}
 	}
 
 	void shoot(Game game) {
