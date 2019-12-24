@@ -207,9 +207,7 @@ public class Game {
 				if(spaceship.shield && b.isColliding(spaceship)) {
 					bullets.remove(i);
 					continue bullet_loop;
-				}
-
-				if(!spaceship.shield && b.isColliding(spaceship)) {
+				} else if(!spaceship.shield && b.isColliding(spaceship)) {
 					spaceship.life -= Constants.BULLET_DAMAGE_MULTIPLIER * b.damage;
 					bullets.remove(i);
 					continue bullet_loop;
