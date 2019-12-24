@@ -68,6 +68,8 @@ class Spaceship implements UID {
 
 	// Visual
 	float shieldTurn = 0;
+	
+	PGraphics shieldDrawing;
 
 	public Spaceship(long uid, Main ctx, int x, int y, ControllerConfig controls, int m, int c, String n) {
 		this.uid = uid;
@@ -79,6 +81,26 @@ class Spaceship implements UID {
 		mass = m;
 		color = c;
 		name = n;
+		
+		shieldDrawing = ctx.createGraphics(Constants.SHIELD_DIAMETER + 80, Constants.SHIELD_DIAMETER + 80);
+		
+		shieldDrawing.beginDraw();
+		shieldDrawing.translate(shieldDrawing.width / 2, shieldDrawing.height / 2);
+		
+		for(int i = 0; i < 360 / 8; i++) {
+			shieldDrawing.rotate((float) (Math.PI / 8));
+			shieldDrawing.fill(255);
+			shieldDrawing.triangle(-15, -Constants.SHIELD_DIAMETER / 2, 0, -Constants.SHIELD_DIAMETER / 2 - 30, 15, -Constants.SHIELD_DIAMETER / 2);
+		}
+		
+		shieldDrawing.noStroke();
+		shieldDrawing.fill(150, 0, 125);
+		shieldDrawing.ellipse(0, 0, Constants.SHIELD_DIAMETER - 10, Constants.SHIELD_DIAMETER - 10);
+		shieldDrawing.strokeWeight(10);
+		shieldDrawing.stroke(255);
+		shieldDrawing.noFill();
+		shieldDrawing.ellipse(0, 0, Constants.SHIELD_DIAMETER - 5, Constants.SHIELD_DIAMETER - 5);
+		shieldDrawing.endDraw();
 	}
 
 	public Spaceship(long uid, Main g, int x, int y, boolean isPlayer, @Nullable ControllerConfig keysForPlayer, int m, int c) {
@@ -166,22 +188,8 @@ class Spaceship implements UID {
 			ctx.fill(255);
 			ctx.pushMatrix();
 			ctx.translate(pos.x, pos.y);
-			ctx.noFill(); 
 			ctx.rotate(shieldTurn / Constants.FPS); 
-			
-			for(int i = 0; i < 360 / 8; i++) {
-				ctx.rotate((float) (Math.PI / 8));
-				ctx.fill(255);
-				ctx.triangle(-15, -Constants.SHIELD_DIAMETER / 2, 0, -Constants.SHIELD_DIAMETER / 2 - 30, 15, -Constants.SHIELD_DIAMETER / 2);
-			}
-			
-			ctx.noStroke();
-			ctx.fill(150, 0, 125);
-			ctx.ellipse(0, 0, Constants.SHIELD_DIAMETER - 10, Constants.SHIELD_DIAMETER - 10);
-			ctx.strokeWeight(10);
-			ctx.stroke(255);
-			ctx.noFill();
-			ctx.ellipse(0, 0, Constants.SHIELD_DIAMETER - 5, Constants.SHIELD_DIAMETER - 5);
+			ctx.image(shieldDrawing, -shieldDrawing.width / 2, -shieldDrawing.height / 2);			
 			ctx.popMatrix();
 			shieldTurn++;
 		}
