@@ -13,29 +13,34 @@ class Bullet implements UID {
 	PVector vel = new PVector(0, 0);
 
 	int damage;
-	float sourceId;
+	long sourceId;
 	boolean homing = false;
 	float maxSpeed;
+	
+	int color;
 
 	Spaceship target;
 
-	public Bullet(long uid, long sourceId, float x, float y, int damage, boolean homing) {
+	public Bullet(long uid, long sourceId, float x, float y, int damage, int color, boolean homing) {
 		this.uid = sourceId;
 		this.sourceId = sourceId;
 		this.pos = new PVector(x, y);
 		this.damage = damage;
+		this.color = color;
 		this.homing = homing;
 	}
 
 	public void draw(PGraphics ctx) {
 		float bsm = Constants.BULLET_SIZE_MULTIPLIER;
 		
+		ctx.fill(this.color);
+		
 		if(homing) {
 			ctx.pushMatrix();
 			ctx.translate(pos.x, pos.y);
 			// point in the direction heading
 			ctx.rotate((float) (PApplet.atan2(vel.y, vel.x) + Math.PI / 2));
-			ctx.triangle(-damage * 4, damage * bsm, 0, -damage * bsm, damage * bsm, damage * bsm);
+			ctx.triangle(-damage * bsm, damage * bsm, 0, -damage * bsm, damage * bsm, damage * bsm);
 			ctx.popMatrix();
 
 		} else {

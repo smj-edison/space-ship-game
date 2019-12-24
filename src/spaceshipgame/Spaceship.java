@@ -279,7 +279,7 @@ class Spaceship implements UID {
 			game.bullets.add(new Bullet(game.getNewUID(), uid,            // VV start the bullet inside of the ship
 					(float) (pos.x + Math.cos(ang - HALF_PI) * (Constants.SHIP_RADIUS - (bulletSize * 4))),
 					(float) (pos.y + Math.sin(ang - HALF_PI) * (Constants.SHIP_RADIUS - (bulletSize * 4))),
-					bulletSize, this.homing));
+					bulletSize, this.color, this.homing));
 			
 			game.bullets.get(game.bullets.size() - 1).aim(ang, bulletSpeed, this.vel);
 			shootingTimer = 0;
