@@ -32,6 +32,7 @@ public class Constants {
 	public static final float HOMING_SPEED = 1;
 	
 	public static final int SHIELD_DIAMETER = 150;
+	public static final float SHIELD_TIMER = 5; // in seconds
 	
 	public static Point[] getNewSpaceshipPoints() {
 		return new Point[] {

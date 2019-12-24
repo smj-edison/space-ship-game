@@ -51,6 +51,9 @@ class Upgrade implements UID {
 			case HOMING:
 				cad = UpgradeCatagories.BULLET_CHANGE;
 				break;
+			case SHIELD:
+				cad = UpgradeCatagories.OTHER;
+				break;
 		}
 	}
 
@@ -118,6 +121,11 @@ class Upgrade implements UID {
 			case GHOST:
 				//TODO: unimplemented drawing for ghost
 				break;
+			case SHIELD:
+				ctx.noFill();
+				ctx.stroke(0);
+				ctx.strokeWeight(10);
+				ctx.ellipse(this.x, this.y, 35, 35);
 			default:
 				break;
 		}
@@ -162,6 +170,10 @@ class Upgrade implements UID {
 				break;
 			case HEAL:
 				s.life = Math.min(Math.max(s.life + 20, 0), s.maxLife);
+				break;
+			case SHIELD:
+				s.shield = true;
+				s.shieldTimeLeft = Constants.SHIELD_TIMER;
 				break;
 		}
 	}
