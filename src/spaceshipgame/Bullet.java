@@ -88,15 +88,15 @@ class Bullet implements UID {
 	public boolean isColliding(Spaceship s) {
 		if(!s.ghost && s.uid != sourceId) {
 
-			/* if(!s.shield) { */
-			return TestOverlap.polygonCircleRotateCollide(Constants.getNewSpaceshipPoints(), s.pos.x, s.pos.y,
+			if(!s.shield) {
+				return TestOverlap.polygonCircleRotateCollide(Constants.getNewSpaceshipPoints(), s.pos.x, s.pos.y,
 							pos.x, pos.y, damage * Constants.BULLET_SIZE_MULTIPLIER, s.ang) ||
 				   TestOverlap.linePolygonRotateCollide(Constants.getNewSpaceshipPoints(), s.pos.x, s.pos.y, //TODO: work on collisions
 							pos.x, pos.y, pos.x + vel.x, pos.y + vel.y, s.ang);
-			/*
-			 * } else { return collision.circleCircleCollide(round(x), round(y), damage * 4,
-			 * round(s.pos.x), round(s.pos.y), 110); }
-			 */
+			} else {
+				return TestOverlap.circleCircleCollide(pos.x, pos.y, damage * 4,
+													   s.pos.x, s.pos.y, Constants.SHIELD_DIAMETER);
+			}
 		}
 		
 		return false;

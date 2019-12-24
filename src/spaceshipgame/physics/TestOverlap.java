@@ -69,7 +69,7 @@ public class TestOverlap {
 		return dx * dx + dy * dy <= diam * diam / 4;
 	}
 
-	static boolean circleCircleCollide(float x1, float y1, float diam1, float x2, float y2, float diam2) {
+	public static boolean circleCircleCollide(float x1, float y1, float diam1, float x2, float y2, float diam2) {
 		float dx = x1 - x2;
 		float dy = y1 - y2;
 		float dist2 = dx * dx + dy * dy;

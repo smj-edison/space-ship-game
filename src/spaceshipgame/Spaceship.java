@@ -165,7 +165,7 @@ class Spaceship implements UID {
 			ctx.noFill(); 
 			ctx.rotate(shieldTurn / Constants.FPS); 
 			
-			for(int i = 0; i < 360 / 10; i++) {
+			for(int i = 0; i < 360 / 8; i++) {
 				ctx.rotate((float) (Math.PI / 8));
 				ctx.fill(255);
 				ctx.triangle(-15, -Constants.SHIELD_DIAMETER / 2, 0, -Constants.SHIELD_DIAMETER / 2 - 30, 15, -Constants.SHIELD_DIAMETER / 2);
@@ -173,11 +173,11 @@ class Spaceship implements UID {
 			
 			ctx.noStroke();
 			ctx.fill(150, 0, 125);
-			ctx.ellipse(0, 0, Constants.SHIELD_DIAMETER, Constants.SHIELD_DIAMETER);
+			ctx.ellipse(0, 0, Constants.SHIELD_DIAMETER - 10, Constants.SHIELD_DIAMETER - 10);
 			ctx.strokeWeight(10);
 			ctx.stroke(255);
 			ctx.noFill();
-			ctx.ellipse(0, 0, Constants.SHIELD_DIAMETER + 5, Constants.SHIELD_DIAMETER + 5);
+			ctx.ellipse(0, 0, Constants.SHIELD_DIAMETER - 5, Constants.SHIELD_DIAMETER - 5);
 			ctx.popMatrix();
 			shieldTurn++;
 		}

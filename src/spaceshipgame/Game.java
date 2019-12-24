@@ -195,7 +195,7 @@ public class Game {
 		}
 
 		bullet_loop: for(int i = bullets.size() - 1; i >= 0; i--) {
-			Bullet b = bullets.get(i); // use itrator
+			Bullet b = bullets.get(i); // use iterator
 
 			if(b == null) {
 				continue;
@@ -203,8 +203,13 @@ public class Game {
 
 			for(int j = ships.size() - 1; j >= 0; j--) {
 				Spaceship spaceship = ships.get(j);
+				
+				if(spaceship.shield && b.isColliding(spaceship)) {
+					bullets.remove(i);
+					continue bullet_loop;
+				}
 
-				if(/* !ts.shield && */b.isColliding(spaceship)) {
+				if(!spaceship.shield && b.isColliding(spaceship)) {
 					spaceship.life -= Constants.BULLET_DAMAGE_MULTIPLIER * b.damage;
 					bullets.remove(i);
 					continue bullet_loop;
