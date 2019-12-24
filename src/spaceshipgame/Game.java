@@ -44,6 +44,7 @@ public class Game {
 		upgradeWeights.put(UpgradeType.MACHINE_GUN_1, 1F);
 		upgradeWeights.put(UpgradeType.MACHINE_GUN_2, 1F);
 		upgradeWeights.put(UpgradeType.MACHINE_GUN_3, 1F);
+		upgradeWeights.put(UpgradeType.SHIELD, 10000F);
 
 		// normalize weights
 		float sum = 0;
